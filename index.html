@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>倪瑞网</title>
+    <meta charset="utf-8">
+    <script>
+    // 姓名验证系统（完整版）
+    (function() {
+        const ALLOWED_NAMES = [
+            "倪瑞"
+        ];
+        
+        const AUTH_KEY = "name_verified";
+        
+        function isVerified() {
+            return sessionStorage.getItem(AUTH_KEY) === "true";
+        }
+        
+        function setVerified() {
+            sessionStorage.setItem(AUTH_KEY, "true");
+        }
+        
+        function showNameDialog() {
+            const overlay = document.createElement('div');
+            overlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: black;
+                z-index: 99999;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                font-family: Arial, sans-serif;
+            `;
+            
+            overlay.innerHTML = `
+                <div style="
+                    background: #1a1a1a;
+                    padding: 40px;
+                    border-radius: 15px;
+                    text-align: center;
+                    box-shadow: 0 0 30px rgba(255,255,255,0.1);
+                    border: 1px solid #333;
+                ">
+                    <h2 style="color: white; margin-bottom: 10px;">身份验证</h2>
+                    <p style="color: #888; font-size: 14px; margin-bottom: 20px;">请输入你的姓名</p>
+                    <input type="text" id="name-input" placeholder="请输入姓名" style="
+                        display: block;
+                        width: 250px;
+                        padding: 12px;
+                        margin: 10px auto;
+                        background: #2a2a2a;
+                        border: 1px solid #444;
+                        border-radius: 8px;
+                        color: white;
+                        font-size: 16px;
+                        text-align: center;
+                    ">
+                    <button id="name-submit" style="
+                        background: #333;
+                        color: white;
+                        border: none;
+                        padding: 12px 30px;
+                        margin-top: 15px;
+                        border-radius: 8px;
+                        cursor: pointer;
+                        font-size: 16px;
+                    ">确认</button>
+                    <p id="name-error" style="color: #ff4444; font-size: 14px; margin-top: 10px; display: none;">❌ 姓名不在允许列表中，请重新输入</p>
+                </div>
+            `;
+            
+            document.body.appendChild(overlay);
+            
+            const input = document.getElementById('name-input');
+            const btn = document.getElementById('name-submit');
+            const errorMsg = document.getElementById('name-error');
+            
+            input.focus();
+            
+            function doVerify() {
+                const name = input.value.trim();
+                if (!name) {
+                    errorMsg.textContent = '请输入姓名';
+                    errorMsg.style.display = 'block';
+                    return;
+                }
+                
+                if (ALLOWED_NAMES.includes(name)) {
+                    setVerified();
+                    overlay.remove();
+                    showWelcome(name);
+                    location.reload();
+                } else {
+                    errorMsg.textContent = '姓名不在允许列表中，请重新输入';
+                    errorMsg.style.display = 'block';
+                    input.value = '';
+                    input.focus();
+                }
+            }
+            
+            btn.onclick = doVerify;
+            input.onkeypress = function(e) {
+                if (e.key === 'Enter') {
+                    doVerify();
+                }
+            };
+        }
+        
+        function showWelcome(name) {
+            const div = document.createElement('div');
+            div.innerHTML = `
+                <div style="
+                    position: fixed;
+                    top: 20px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    color: white;
+                    padding: 15px 30px;
+                    border-radius: 50px;
+                    font-size: 18px;
+                    font-weight: bold;
+                    z-index: 10000;
+                    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                    animation: fadeInOut 3s ease forwards;
+                ">
+                    欢迎回来，${name}！
+                </div>
+                <style>
+                    @keyframes fadeInOut {
+                        0% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+                        15% { opacity: 1; transform: translateX(-50%) translateY(0); }
+                        85% { opacity: 1; transform: translateX(-50%) translateY(0); }
+                        100% { opacity: 0; transform: translateX(-50%) translateY(-20px); visibility: hidden; }
+                    }
+                </style>
+            `;
+            document.body.appendChild(div);
+            setTimeout(() => {
+                if (div && div.parentNode) div.remove();
+            }, 3000);
+        }
+        
+        if (!isVerified()) {
+            setTimeout(function() {
+                showNameDialog();
+            }, 100);
+        }
+    })();
+    </script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #0a0e27;
+            color: #e0e0e0;
+            text-align: center;
+        }
+        h1 {
+            color: #00d4ff;
+        }
+    </style>
+</head>
+<body>
+    <h1>欢迎来到倪瑞网。</h1>
+    <p>这是一个全新的独立网站，验证通过后才能查看内容。</p>
+</body>
+</html>
