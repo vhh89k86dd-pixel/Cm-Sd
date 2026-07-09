@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>神秘的倪瑞 - 倪瑞网</title>
+    <meta charset="utf-8">
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #0a0e27;
+            color: #e0e0e0;
+        }
+        h1 {
+            color: #00d4ff;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 28px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px 20px;
+        }
+        .card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 15px 15px 20px 15px;
+            transition: transform 0.25s;
+            backdrop-filter: blur(4px);
+        }
+        .card:hover {
+            transform: translateY(-6px);
+        }
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            display: block;
+        }
+        .card .caption {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: 15px;
+            color: #d0d0e0;
+            line-height: 1.7;
+            margin-top: 14px;
+            text-align: center;
+            letter-spacing: 0.3px;
+            padding: 0 4px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 40px;
+            color: #00d4ff;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* 小屏适配 */
+        @media (max-width: 700px) {
+            .gallery {
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
+        }
+        @media (max-width: 450px) {
+            .gallery {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            .card img {
+                height: 220px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>神秘的倪瑞</h1>
+    <p class="subtitle">鸡瑞wcnm</p>
+
+    <div class="gallery">
+        <!-- 卡片 1 -->
+        <div class="card">
+            <img src="https://res.cloudinary.com/dc6yzsom9/image/upload/q_auto,f_auto/你的图片1.jpg" alt="图片1" loading="lazy">
+            <div class="caption">这是第一张图的简介，写一些关于这张图的故事或感受。</div>
+        </div>
+
+        <!-- 卡片 2 -->
+        <div class="card">
+            <img src="https://res.cloudinary.com/dc6yzsom9/image/upload/q_auto,f_auto/你的图片2.jpg" alt="图片2" loading="lazy">
+            <div class="caption">第二张图的简介，风格可以统一，也可以每张不同。</div>
+        </div>
+
+        <!-- 卡片 3 -->
+        <div class="card">
+            <img src="https://res.cloudinary.com/dc6yzsom9/image/upload/q_auto,f_auto/你的图片3.jpg" alt="图片3" loading="lazy">
+            <div class="caption">第三张图的简介，字体是衬线字体，阅读更舒服。</div>
+        </div>
+
+        <!-- 卡片 4 -->
+        <div class="card">
+            <img src="https://res.cloudinary.com/dc6yzsom9/image/upload/q_auto,f_auto/你的图片4.jpg" alt="图片4" loading="lazy">
+            <div class="caption">每张图下方都有简介，间距也拉大了。</div>
+        </div>
+
+        <!-- 卡片 5 -->
+        <div class="card">
+            <img src="https://res.cloudinary.com/dc6yzsom9/image/upload/q_auto,f_auto/你的图片5.jpg" alt="图片5" loading="lazy">
+            <div class="caption">可以继续增加卡片，复制这一段就行。</div>
+        </div>
+
+        <!-- 卡片 6 -->
+        <div class="card">
+            <img src="https://res.cloudinary.com/dc6yzsom9/image/upload/q_auto,f_auto/你的图片6.jpg" alt="图片6" loading="lazy">
+            <div class="caption">图片自动适应卡片大小，简介文字清晰。</div>
+        </div>
+    </div>
+
+    <br>
+    <a href="/" class="back-link">← 返回首页</a>
+</body>
+</html>
